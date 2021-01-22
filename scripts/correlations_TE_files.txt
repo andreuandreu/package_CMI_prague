@@ -1,2 +1,0 @@
-../data/exp_pro/correlations_TE/couplings_TE_Knn250-2500_122.txt
-../data/exp_pro/correlations_TE/couplings_TE_Knn150-2500_211.txt
