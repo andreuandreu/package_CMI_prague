@@ -50,14 +50,6 @@ nearest neighbours aproach for a embedded dimensionality 5
 it is not able to process α != 1 it is not able to process α != 1
 """
 
-function tranfserentropy(joint, est::Kraskov, dim = 5, base =2)
-    print("kra5")
-    H3 = Entropies.genentropy(joint, est)
-    H2a = Entropies.genentropy(joint[:,[5,2, 3, 4]], est)
-    H2b = Entropies.genentropy(joint[:,[1,2, 3, 4]], est)
-    H1 = Entropies.genentropy(joint[:,[2, 3, 4]], est)
-    return -H3+H2a+H2b-H1
-end
 
 
 
