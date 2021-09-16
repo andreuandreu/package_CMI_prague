@@ -10,7 +10,7 @@ import pickle
 import matplotlib
 import os
 import matplotlib.ticker as ticker
-
+ 
 
 #131072 samples of the first components of the coupled Roessler systems, for 100 different epsilons from 0 to almost 0.25.
 #from zero eps to its maximum

@@ -19,12 +19,12 @@ import matplotlib.ticker as ticker
 #python plot_TE-corelation.py ./correlations_TE_files.txt ./correlations_TE_files2.txt
 
 def read_data(name):
-    usecols = [0,1]
+    usecols = [0,1, 2]
     print (name)
     #name = './correlations_TE/couplings_TE_VFb10-base2_1-5-10_122.txt'
-    x, y= np.loadtxt(name,  comments='#', usecols = usecols, unpack = True )##, 
+    x, y, sd = np.loadtxt(name,  comments='#', usecols = usecols, unpack = True )##, 
 
-    return x, y
+    return x, y, sd
 
 
 def read_texts(fname ):
@@ -47,7 +47,7 @@ def read_texts(fname ):
 def plot_subfigures(i):
 
     ls = ['-', ':','-', ':', '-', ':', '-', ':', '-', ':', '-', ':', '-', ':' ]
-    labels =  ['KozachenkoLeonenko x->y', 'KozachenkoLeonenko y->x'] #['VisitationFrequency x->y', 'VisitationFrequency y->x']#,
+    labels =  ['Kraskov x->y', 'Kraskov y->x'] #['VisitationFrequency x->y', 'VisitationFrequency y->x']#,KozachenkoLeonenko 
     ylab = ["$I(a_0, b_{\u03C4}| b_0 )$", "$I(a_0, b_{\u03C4}| b_0, b_5, b_{10} )$"]
     cl = ['r', 'b']
     ax = plt.subplot(2, 1, 1+i) 
@@ -56,11 +56,12 @@ def plot_subfigures(i):
     ax.set_ylabel(ylab[i])
     
     for i, n in enumerate(names):
-        x, y = read_data(n)
+        x, y, sd = read_data(n)
         #lb = n[-11:-4]
         print(i, n)
         lb = labels[i]
         ax.plot(x, y, label = lb, ls = ls[i], color = cl[i])
+        ax.fill_between(x,   y-sd, y+sd, color =  cl[i], alpha = 0.1)
 
     ax.legend()
     #ax.legend(frameon=False, fontsize = 10 , loc = 'lower left')
@@ -72,7 +73,6 @@ fig = plt.figure('name')
 for (i,n) in enumerate(sys.argv[1:]):
     doc_files_name = n
     names = read_texts(doc_files_name) 
-    
     plot_subfigures(i)
     
 

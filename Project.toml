@@ -1,11 +1,16 @@
 name = "package_CMI_prague"
 
 [deps]
+DSP = "717857b8-e6f2-59f4-9121-6e50c889abd2"
 DelayEmbeddings = "5732040d-69e3-5649-938a-b6b4f237613f"
 DrWatson = "634d3b9d-ee7a-5ddf-bec9-22491ea816e1"
 Entropies = "ed8fcbec-b94c-44b6-89df-898894ad9591"
+FFTW = "7a1cc6ca-52ef-59f5-83cd-3a7055c09341"
+MAT = "23992714-dd62-5051-b70f-ba57cb901cac"
 PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"
+Simplices = "d5428e67-3037-59ba-9ab1-57a04f0a3b6a"
 Suppressor = "fd094767-a336-5f1f-9728-57cf17d0bbfb"
+TransferEntropy = "ea221983-52f3-5440-99c7-13ea201cd633"
 package_CMI_prague = "79125185-979c-4519-b0a6-d4774d2ab5db"
 
 [compat]

@@ -34,11 +34,12 @@ nearest neighbours aproach to estimate provabilitues, it is not able to process 
 
 """
 
-function tranfserentropy(joint, est::Kraskov,  base =2)
-    H3 = Entropies.genentropy(joint, est)
-    H2a =Entropies.genentropy(joint[:,[3,2]], est)
-    H2b=Entropies.genentropy(joint[:,[1,2]], est)
-    H1=Entropies.genentropy(joint[:,[2]], est)
+function tranfserentropy(joint, est::VisitationFrequency;  α =2.0, base =2)
+    #genentropy!(p, x, est; α = 1.0, base = Base.MathConstants.e)
+    H3 = Entropies.genentropy(joint, est, α=α)
+    H2a = Entropies.genentropy(joint[:,[3,2]], est, α=α)
+    H2b = Entropies.genentropy(joint[:,[1,2]], est, α=α)
+    H1 = Entropies.genentropy(joint[:,[2]], est, α=α)
     return -H3+H2a+H2b-H1
 end
 
@@ -46,18 +47,46 @@ end
 tranfserentropy(joint, est::Kraskov,  α =1.0, base =2)
 
 Estimate transfer (generalized orther α =1) for a joint contruct using a default Kraskov
-nearest neighbours aproach for a embedded dimensionality 5 
-it is not able to process α != 1 it is not able to process α != 1
+nearest neighbours aproach to estimate provabilitues, it is not able to process α != 1
+
 """
 
-function tranfserentropy(joint, est::Kraskov, dim::Int = 5, base =2)
-    print("kra5")
-    H3 = Entropies.genentropy(joint, est)
-    H2a = Entropies.genentropy(joint[:,[5,2, 3, 4]], est)
-    H2b = Entropies.genentropy(joint[:,[1,2, 3, 4]], est)
-    H1 = Entropies.genentropy(joint[:,[2, 3, 4]], est)
+function tranfserentropy(joint, est::Kraskov; α =1.0, base =2)
+    if length(joint[1]) == 3
+        H3 = Entropies.genentropy(joint, est)
+        H2a =Entropies.genentropy(joint[:,[3,2]], est)
+        H2b=Entropies.genentropy(joint[:,[1,2]], est)
+        H1=Entropies.genentropy(joint[:,[2]], est)
+        return -H3+H2a+H2b-H1
+    end
+    if length(joint[1]) == 5
+        H3 = Entropies.genentropy(joint, est)
+        H2a = Entropies.genentropy(joint[:,[5,2, 3, 4]], est)
+        H2b = Entropies.genentropy(joint[:,[1,2, 3, 4]], est)
+        H1 = Entropies.genentropy(joint[:,[2, 3, 4]], est)
     return -H3+H2a+H2b-H1
+    end
+
 end
+
+function tranfserentropy(joint, est; α =1.0, base =2)
+    if length(joint[1]) == 3
+        H3 = Entropies.genentropy(joint, est)
+        H2a =Entropies.genentropy(joint[:,[3,2]], est)
+        H2b=Entropies.genentropy(joint[:,[1,2]], est)
+        H1=Entropies.genentropy(joint[:,[2]], est)
+        return -H3+H2a+H2b-H1
+    end
+    if length(joint[1]) == 5
+        H3 = Entropies.genentropy(joint, est)
+        H2a = Entropies.genentropy(joint[:,[5,2, 3, 4]], est)
+        H2b = Entropies.genentropy(joint[:,[1,2, 3, 4]], est)
+        H1 = Entropies.genentropy(joint[:,[2, 3, 4]], est)
+    return -H3+H2a+H2b-H1
+    end
+
+end
+
 
 
 

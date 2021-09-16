@@ -10,6 +10,7 @@ import pickle
 import matplotlib
 import os
 import matplotlib.ticker as ticker
+import pandas as pd
 #import julia
 #from julia.api import Julia
 #jl = Julia(compiled_modules=False)
@@ -76,13 +77,26 @@ def load_n_coupled_systems_read_once(num_couplings):
 
     return x_arr, y_arr
 
+def read_bin_bin_dataframe(name):
 
-
+    dt = np.dtype( '<f8')
+    
+    with open(name, 'rb') as f:
+        b = f.read()
+    np_data = np.frombuffer(b, dt)
+    len_data = len(np_data)
+    x = np_data[0:int(len_data/2)-1]
+    y = np_data[int(len_data/2)+1:len_data]
+    df = pd.DataFrame({'x':x, 'y':y})
+    print (df)
+    return df
 
 n_points = 131072#000 #13107200
-name = '/Users/andreu/codes_TE/transfer_entropy_rossler_data/arosf11n00eps100raw.dat'
+#name = '/Users/andreu/codes_TE/transfer_entropy_rossler_data/arosf11n00eps100raw.dat'
 max_coupling = 0.25
-content = load_n_coupled_systems_read_once(100)
+#content = load_n_coupled_systems_read_once(100)
+name = '../data/exp_raw/binfiles/Rossler_bin_0.000.bin'
+read_bin_bin_dataframe(name)
 
 
 #print ('len   '  , len(x_arr), len(y_arr),  len(x_arr[1]) )
